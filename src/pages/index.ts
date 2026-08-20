@@ -3,4 +3,4 @@
  * Main route entry views for public, user, staff, and admin routes.
  */
 
-export {};
+export * from './Home';
