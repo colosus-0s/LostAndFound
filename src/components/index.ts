@@ -1,8 +1,7 @@
 /**
- * Shared UI Components
- * Foundation for reusable atomic and composite UI elements.
+ * Shared UI & Feature Components
  */
 
 export * from './ui';
 export * from './navigation';
-export * from './home';
+export * from './hero';
