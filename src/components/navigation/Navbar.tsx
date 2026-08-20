@@ -14,16 +14,16 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#080F1A]/90 backdrop-blur-xl border-b border-white/[0.08] nav-header">
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12">
+    <header className="sticky top-0 z-50 w-full bg-[#06080E]/85 backdrop-blur-xl border-b border-white/[0.08] nav-header">
+      <div className="max-w-[1536px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Brand Logo (Left) */}
           <a
             href={ROUTE_PATHS.PUBLIC.HOME}
-            className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#6366F1]/50 rounded-xl p-1 transition-opacity hover:opacity-90 group"
+            className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#6366F1]/50 rounded-xl p-1 transition-opacity hover:opacity-90 group shrink-0"
           >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#6366F1] via-[#818CF8] to-[#22D3EE] p-0.5 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition-all">
-              <div className="w-full h-full bg-[#080F1A] rounded-[10px] flex items-center justify-center">
+              <div className="w-full h-full bg-[#06080E] rounded-[10px] flex items-center justify-center">
                 <Search className="w-5 h-5 text-[#6366F1]" />
               </div>
             </div>
@@ -38,7 +38,7 @@ export const Navbar: React.FC = () => {
           </a>
 
           {/* Centered Navigation Links (Center) */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10" aria-label="Main Navigation">
+          <nav className="hidden md:flex items-center gap-10 lg:gap-14" aria-label="Main Navigation">
             {navLinks.map((link) => {
               const isActive = link.href === currentPath;
               return (
@@ -53,7 +53,7 @@ export const Navbar: React.FC = () => {
                 >
                   {link.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#6366F1] rounded-full shadow-sm shadow-[#6366F1]" />
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#6366F1] rounded-full shadow-sm shadow-[#6366F1]" />
                   )}
                 </a>
               );
@@ -61,17 +61,17 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Action Buttons (Right) */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-6 shrink-0">
             <a
               href={ROUTE_PATHS.PUBLIC.LOGIN}
-              className="text-sm font-medium text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366F1]/50 rounded-lg px-3 py-1.5"
+              className="text-sm font-medium text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366F1]/50 rounded-lg px-2 py-1"
             >
               Sign In
             </a>
             <a href={ROUTE_PATHS.PUBLIC.REPORT}>
               <button
                 type="button"
-                className="bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 transition-all flex items-center gap-2 cursor-pointer"
+                className="bg-gradient-to-r from-[#6366F1] to-[#4F46E5] hover:from-[#4F46E5] hover:to-[#4338CA] text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 transition-all flex items-center gap-2 cursor-pointer"
               >
                 <PlusCircle className="w-4 h-4" />
                 <span>+ Report Item</span>
