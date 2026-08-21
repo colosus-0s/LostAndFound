@@ -46,6 +46,9 @@ export const Navbar: React.FC = () => {
             }`}
           >
             Browse
+            {isActive('/browse') && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 to-cyan-400 rounded-full shadow-[0_0_8px_rgba(124,58,237,0.8)]" />
+            )}
           </Link>
           <Link
             to="/how-it-works"
@@ -54,6 +57,9 @@ export const Navbar: React.FC = () => {
             }`}
           >
             How It Works
+            {isActive('/how-it-works') && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 to-cyan-400 rounded-full shadow-[0_0_8px_rgba(124,58,237,0.8)]" />
+            )}
           </Link>
           <Link
             to="/about"
@@ -62,6 +68,9 @@ export const Navbar: React.FC = () => {
             }`}
           >
             About
+            {isActive('/about') && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 to-cyan-400 rounded-full shadow-[0_0_8px_rgba(124,58,237,0.8)]" />
+            )}
           </Link>
         </nav>
 

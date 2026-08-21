@@ -1,10 +1,18 @@
 import React from 'react';
+import { HowItWorksHero } from '../components/how-it-works/HowItWorksHero';
+import { RecoveryJourney } from '../components/how-it-works/RecoveryJourney';
+import { TrustSection } from '../components/how-it-works/TrustSection';
+import { HowItWorksCTA } from '../components/how-it-works/HowItWorksCTA';
 
 export const HowItWorksPage: React.FC = () => {
   return (
-    <div className="max-w-[1440px] mx-auto px-6 py-20 text-center">
-      <h1 className="text-3xl font-bold text-white">How It Works</h1>
-      <p className="text-slate-400 mt-2">How it works information placeholder.</p>
+    <div className="min-h-screen bg-[#04060A] text-slate-100 relative overflow-hidden">
+      <main className="space-y-4">
+        <HowItWorksHero />
+        <RecoveryJourney />
+        <TrustSection />
+        <HowItWorksCTA />
+      </main>
     </div>
   );
 };
