@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle2, Search, Home, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, Search, Home, ShieldCheck, Eye } from 'lucide-react';
 
 interface ReportSuccessProps {
   reportId: string;
@@ -27,7 +27,7 @@ export const ReportSuccess: React.FC<ReportSuccessProps> = ({ reportId, reportTy
         </h1>
 
         <p className="text-slate-300 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
-          Your {isLost ? 'lost item' : 'found item'} report is now active in the Lost & Found system. We'll use the information you provided to surface potential matches.
+          Your {isLost ? 'lost item' : 'found item'} report is now part of the Lost & Found directory. We'll use the information you provided to surface potential matches.
         </p>
       </div>
 
@@ -38,21 +38,29 @@ export const ReportSuccess: React.FC<ReportSuccessProps> = ({ reportId, reportTy
       </div>
 
       {/* Action Buttons */}
-      <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
         <Link
-          to="/browse"
+          to={`/item/${reportId}`}
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-500 text-white font-bold text-xs uppercase tracking-wider hover:opacity-95 transition-all shadow-[0_0_20px_rgba(124,58,237,0.4)]"
         >
-          <Search className="w-4 h-4" />
-          <span>Browse Lost & Found Directory</span>
+          <Eye className="w-4 h-4" />
+          <span>View My Report</span>
+        </Link>
+
+        <Link
+          to="/browse"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#0B0F1B] border border-indigo-900/60 text-slate-300 font-bold text-xs uppercase tracking-wider hover:text-white hover:border-violet-500/50 transition-all"
+        >
+          <Search className="w-4 h-4 text-cyan-400" />
+          <span>Browse Items</span>
         </Link>
 
         <Link
           to="/"
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#0B0F1B] border border-indigo-900/60 text-slate-300 font-bold text-xs uppercase tracking-wider hover:text-white hover:border-violet-500/50 transition-all"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-[#0B0F1B] border border-indigo-950/80 text-slate-400 font-bold text-xs uppercase tracking-wider hover:text-slate-200 transition-all"
         >
-          <Home className="w-4 h-4 text-cyan-400" />
-          <span>Return Home</span>
+          <Home className="w-4 h-4" />
+          <span>Home</span>
         </Link>
       </div>
     </div>

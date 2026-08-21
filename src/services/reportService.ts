@@ -1,10 +1,12 @@
+import { itemService } from './itemService';
+
 export interface ReportFormData {
   reportType: 'LOST' | 'FOUND' | null;
   itemName: string;
   category: string;
   brand: string;
   color: string;
-  photos: string[]; // Base64 or object URLs for local preview
+  photos: string[];
   locationArea: string;
   specificPlace: string;
   date: string;
@@ -28,15 +30,15 @@ export const INITIAL_REPORT_DATA: ReportFormData = {
 
 export const reportService = {
   submitReport: async (data: ReportFormData): Promise<{ success: boolean; reportId: string }> => {
-    // Simulate frontend mock delay
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    // Simulate brief processing delay
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
-    const mockId = `RPT-${Math.floor(100000 + Math.random() * 900000)}`;
-    console.log('[Mock Report Submission]', mockId, data);
+    // Persist new report into unified localStorage item storage
+    const newItem = itemService.addUserReport(data);
 
     return {
       success: true,
-      reportId: mockId,
+      reportId: newItem.id,
     };
   },
 };

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
-import { ArrowLeft, ArrowRight, Loader2, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Loader2, Sparkles, ChevronLeft } from 'lucide-react';
 import { reportService, INITIAL_REPORT_DATA, ReportFormData } from '../services/reportService';
 import { ReportProgress } from '../components/report/ReportProgress';
 import { ReportTypeStep } from '../components/report/ReportTypeStep';
@@ -15,6 +16,7 @@ import { ReportSuccess } from '../components/report/ReportSuccess';
 const STEPS_LIST = ['Type', 'Item Info', 'Photos', 'Location', 'Date & Time', 'Description', 'Review'];
 
 export const ReportPage: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<ReportFormData>(INITIAL_REPORT_DATA);
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -121,6 +123,14 @@ export const ReportPage: React.FC = () => {
     }
   };
 
+  const handlePageBack = () => {
+    if (window.history.length > 2) {
+      navigate(-1);
+    } else {
+      navigate('/browse');
+    }
+  };
+
   return (
     <div ref={containerRef} className="min-h-screen bg-[#04060A] text-slate-100 py-10 md:py-16 px-6 md:px-12 relative overflow-hidden">
       
@@ -130,6 +140,26 @@ export const ReportPage: React.FC = () => {
 
       <main className="max-w-[1200px] mx-auto relative z-10 space-y-8">
         
+        {/* Top Page Navigation Control (PROBLEM 1 FIX) */}
+        {!submittedReportId && (
+          <div className="flex items-center justify-between">
+            <button
+              onClick={handlePageBack}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors"
+            >
+              <ChevronLeft className="w-4 h-4 text-violet-400" />
+              <span>Back to Browse</span>
+            </button>
+            
+            <Link
+              to="/browse"
+              className="text-xs font-semibold text-slate-300 hover:underline"
+            >
+              Browse Directory
+            </Link>
+          </div>
+        )}
+
         {/* Page Top Title */}
         {!submittedReportId && (
           <div className="text-center space-y-2 mb-6">
@@ -216,7 +246,7 @@ export const ReportPage: React.FC = () => {
               )}
             </div>
 
-            {/* Step Navigation Bar */}
+            {/* Form Step Navigation Bar */}
             <div className="max-w-2xl lg:max-w-3xl mx-auto flex items-center justify-between pt-6 border-t border-indigo-950/80">
               <button
                 disabled={currentStep === 1 || isSubmitting}
