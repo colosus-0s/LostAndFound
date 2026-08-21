@@ -54,11 +54,11 @@ export const HeroSection: React.FC = () => {
             <div className="space-y-3">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#111318] tracking-tight font-sans leading-[1.1]">
                 Lost something? <br />
-                <span className="text-blue-600">Let's help you find it.</span>
+                <span className="text-blue-600">We'll help you find it.</span>
               </h1>
               
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
-                Search reported community items, report belongings you've lost or found, and connect potential matches in one place.
+                A community Lost & Found platform for reporting lost items, sharing found items, and helping reunite them with their owners.
               </p>
             </div>
 
@@ -70,7 +70,7 @@ export const HeroSection: React.FC = () => {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search lost or found items (e.g. iPhone, Wallet, Library)..."
+                  placeholder="Search for lost or found items by name, location, category..."
                   className="w-full px-3 py-2.5 text-gray-900 placeholder-gray-400 text-sm md:text-base focus:outline-none font-medium bg-transparent"
                   aria-label="Search lost or found items"
                 />
@@ -104,7 +104,7 @@ export const HeroSection: React.FC = () => {
               </button>
             </div>
 
-            {/* Trending Categories Chips */}
+            {/* Popular Browse Categories */}
             <div className="space-y-3 pt-2">
               <span className="text-xs font-extrabold uppercase tracking-wider text-gray-400 block">
                 Popular Browse Categories:
