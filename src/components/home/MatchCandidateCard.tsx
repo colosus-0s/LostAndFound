@@ -11,10 +11,10 @@ export const MatchCandidateCard: React.FC<MatchCandidateCardProps> = ({ candidat
 
   return (
     <div
-      className={`js-candidate-card w-full rounded-2xl p-4 transition-all duration-500 hover:translate-y-[-2px] ${
+      className={`js-candidate-card w-full rounded-2xl p-4 transition-all duration-300 hover:translate-y-[-2px] ${
         isPrimaryMatch
           ? 'js-primary-candidate bg-[#0B0F1B]/95 border-2 border-violet-500/60 shadow-[0_0_30px_rgba(139,92,246,0.3)] relative overflow-hidden'
-          : 'bg-[#0A0D18]/80 border border-indigo-950/70 opacity-75 hover:opacity-100'
+          : 'bg-[#0A0D18]/90 border border-indigo-950/80 text-slate-200'
       }`}
     >
       {/* Primary Highlight Glow Line */}
@@ -30,7 +30,7 @@ export const MatchCandidateCard: React.FC<MatchCandidateCardProps> = ({ candidat
               className={`px-2 py-0.5 rounded text-[9px] font-extrabold tracking-widest uppercase flex items-center gap-1 ${
                 isPrimaryMatch
                   ? 'bg-cyan-500/20 border border-cyan-500/40 text-cyan-300'
-                  : 'bg-slate-800 text-slate-400'
+                  : 'bg-slate-800 text-slate-300 border border-slate-700'
               }`}
             >
               <PackageCheck className="w-2.5 h-2.5" />
@@ -38,18 +38,18 @@ export const MatchCandidateCard: React.FC<MatchCandidateCardProps> = ({ candidat
             </span>
 
             {isPrimaryMatch && (
-              <span className="js-primary-badge px-2 py-0.5 rounded bg-violet-600/30 border border-violet-500/40 text-violet-300 text-[9px] font-extrabold tracking-widest uppercase flex items-center gap-1 transition-all duration-300">
+              <span className="js-primary-badge px-2 py-0.5 rounded bg-violet-600/30 border border-violet-500/40 text-violet-300 text-[9px] font-extrabold tracking-widest uppercase flex items-center gap-1">
                 <Sparkles className="w-2.5 h-2.5 text-violet-400" />
                 <span>POTENTIAL MATCH</span>
               </span>
             )}
           </div>
 
-          <h5 className={`font-bold text-sm tracking-tight ${isPrimaryMatch ? 'text-white' : 'text-slate-300'}`}>
+          <h5 className={`font-bold text-sm tracking-tight ${isPrimaryMatch ? 'text-white' : 'text-slate-200'}`}>
             {title}
           </h5>
 
-          <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
+          <div className="flex items-center gap-1.5 text-xs text-slate-300 font-medium">
             <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
             <span className="truncate">{location}</span>
           </div>
@@ -62,7 +62,7 @@ export const MatchCandidateCard: React.FC<MatchCandidateCardProps> = ({ candidat
             className={`js-match-score font-extrabold text-base md:text-lg tracking-tight ${
               isPrimaryMatch
                 ? 'text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.6)]'
-                : 'text-slate-400'
+                : 'text-slate-300'
             }`}
           >
             {matchPercentage}%
