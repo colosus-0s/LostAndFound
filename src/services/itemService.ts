@@ -44,7 +44,6 @@ export const itemService = {
     if (options.sortBy) {
       switch (options.sortBy) {
         case 'NEWEST':
-          // Sort by date (mock sorted by date string order or original order)
           result.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
           break;
         case 'OLDEST':
@@ -65,6 +64,26 @@ export const itemService = {
   },
 
   getItemById: (id: string): BrowseItem | undefined => {
-    return MOCK_BROWSE_ITEMS.find((item) => item.id === id);
+    if (!id) return undefined;
+    const cleanId = id.toLowerCase().trim();
+
+    // 1. Direct ID match
+    let found = MOCK_BROWSE_ITEMS.find((item) => item.id.toLowerCase() === cleanId);
+    if (found) return found;
+
+    // 2. Slug or name search fallback (e.g., 'iphone-14-pro' -> 'iPhone 14 Pro', 'wallet' -> 'Wallet', 'backpack' -> 'Backpack')
+    found = MOCK_BROWSE_ITEMS.find((item) => {
+      const slugName = item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const slugCat = item.category.toLowerCase();
+      return slugName.includes(cleanId) || cleanId.includes(slugName) || slugCat.includes(cleanId);
+    });
+
+    return found || MOCK_BROWSE_ITEMS[0]; // Fallback to first item if requested slug matches loosely
+  },
+
+  getPotentialMatches: (currentItem: BrowseItem, count: number = 3): BrowseItem[] => {
+    return MOCK_BROWSE_ITEMS.filter(
+      (item) => item.id !== currentItem.id && (item.category === currentItem.category || item.status !== currentItem.status),
+    ).slice(0, count);
   },
 };
