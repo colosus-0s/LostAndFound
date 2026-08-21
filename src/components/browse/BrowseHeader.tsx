@@ -1,61 +1,67 @@
 import React from 'react';
-import { Search, FolderKanban, SlidersHorizontal } from 'lucide-react';
+import { Search, Sparkles, X } from 'lucide-react';
 
 interface BrowseHeaderProps {
   searchQuery: string;
-  setSearchQuery: (q: string) => void;
+  setSearchQuery: (query: string) => void;
   totalResults: number;
 }
 
-export const BrowseHeader: React.FC<BrowseHeaderProps> = ({ searchQuery, setSearchQuery, totalResults }) => {
+export const BrowseHeader: React.FC<BrowseHeaderProps> = ({
+  searchQuery,
+  setSearchQuery,
+  totalResults,
+}) => {
   return (
-    <div className="w-full space-y-6 mb-8">
-      {/* Top Header Eyebrow & Title */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-indigo-950/80">
-        <div className="space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-950/40 border border-violet-500/40 text-violet-300 text-[11px] font-bold tracking-widest uppercase">
-            <FolderKanban className="w-3.5 h-3.5 text-violet-400" />
-            <span>LOST & FOUND DIRECTORY</span>
+    <div className="space-y-6">
+      
+      {/* Top Title & Subtitle */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="space-y-1">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold tracking-widest uppercase">
+            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+            <span>COMMUNITY DIRECTORY</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight font-sans">
-            Find what you're looking for.
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111318] font-sans tracking-tight">
+            Browse Reported Items
           </h1>
 
-          <p className="text-slate-300 text-sm md:text-base font-normal">
-            Browse reported lost and found items across the community.
+          <p className="text-gray-600 text-sm md:text-base font-normal max-w-xl">
+            Explore lost and found belongings reported across campus. Use filters to narrow by location, status, or date window.
           </p>
         </div>
 
-        {/* Counter Badge */}
-        <div className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 bg-[#0B0F1B] px-3.5 py-1.5 rounded-xl border border-indigo-950/80 self-start md:self-auto">
-          <SlidersHorizontal className="w-3.5 h-3.5 text-cyan-400" />
-          <span>Showing <strong className="text-white">{totalResults}</strong> items</span>
+        {/* Results Counter */}
+        <div className="px-4 py-2 rounded-xl bg-white border border-gray-200 text-xs font-bold text-gray-600 shrink-0 shadow-subtle">
+          Showing <span className="text-[#111318] font-black">{totalResults}</span> active report{totalResults === 1 ? '' : 's'}
         </div>
       </div>
 
-      {/* Prominent Search Bar */}
-      <div className="relative w-full">
-        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-          <Search className="h-5 w-5 text-violet-400" />
+      {/* Prominent Search Bar Input */}
+      <div className="relative w-full max-w-3xl">
+        <div className="relative flex items-center bg-white border-2 border-gray-200 focus-within:border-blue-600 rounded-2xl shadow-subtle transition-all">
+          <Search className="w-5 h-5 text-gray-400 ml-4 shrink-0" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by keyword, item name, brand, location, or description..."
+            className="w-full px-3 py-3.5 text-gray-900 placeholder-gray-400 text-sm md:text-base focus:outline-none bg-transparent font-medium"
+            aria-label="Search items by keyword"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="mr-3 p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition-colors"
+              aria-label="Clear search query"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
         </div>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search lost or found items by name, category, or location..."
-          className="w-full pl-12 pr-4 py-4 bg-[#0A0D18]/90 border border-indigo-900/60 rounded-2xl text-white placeholder-slate-400 text-sm md:text-base focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-500/30 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
-          aria-label="Search lost or found items"
-        />
-        {searchQuery && (
-          <button
-            onClick={() => setSearchQuery('')}
-            className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-white text-xs font-bold uppercase tracking-wider"
-          >
-            Clear
-          </button>
-        )}
       </div>
+
     </div>
   );
 };

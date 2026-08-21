@@ -1,4 +1,5 @@
 import React from 'react';
+import { Tag, Palette, Shield, Info } from 'lucide-react';
 import { BrowseItem } from '../../data/mockBrowseItems';
 
 interface ItemDetailsGroupProps {
@@ -6,31 +7,55 @@ interface ItemDetailsGroupProps {
 }
 
 export const ItemDetailsGroup: React.FC<ItemDetailsGroupProps> = ({ item }) => {
-  const details = [
-    { label: 'Category', value: item.category },
-    { label: 'Report Status', value: item.status },
-    { label: 'Reported Date', value: item.date },
-    { label: 'Location Zone', value: item.location },
-    { label: 'Color / Finish', value: item.metadata.color || 'Standard' },
-    { label: 'Brand / Make', value: item.metadata.brand || 'Unspecified' },
-    { label: 'Verification Protocol', value: 'Encrypted Ownership Proof' },
-  ];
-
   return (
-    <div className="w-full bg-[#0A0D18]/90 border border-indigo-950/80 rounded-3xl p-6 md:p-8 space-y-4 shadow-lg">
-      <h3 className="text-lg font-extrabold text-white font-sans tracking-tight">
-        Detailed Specifications
-      </h3>
+    <div className="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 space-y-6 shadow-subtle">
+      <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-gray-500">
+        <Info className="w-4 h-4 text-blue-600" />
+        <span>REPORT SPECIFICATIONS</span>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {details.map((d, idx) => (
-          <div key={idx} className="bg-[#0B0F1B]/80 border border-indigo-950/80 p-3.5 rounded-xl space-y-1">
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block">
-              {d.label}
-            </span>
-            <span className="text-white text-sm font-semibold block truncate">{d.value}</span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
+        {/* Category */}
+        <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 space-y-1">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-gray-500">
+            <Tag className="w-3.5 h-3.5 text-blue-600" />
+            <span>Category</span>
           </div>
-        ))}
+          <span className="font-extrabold text-[#111318] text-base block">{item.category}</span>
+        </div>
+
+        {/* Brand */}
+        <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 space-y-1">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-gray-500">
+            <Shield className="w-3.5 h-3.5 text-blue-600" />
+            <span>Brand / Manufacturer</span>
+          </div>
+          <span className="font-extrabold text-[#111318] text-base block">
+            {item.metadata.brand || 'Unspecified'}
+          </span>
+        </div>
+
+        {/* Color */}
+        <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 space-y-1">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-gray-500">
+            <Palette className="w-3.5 h-3.5 text-blue-600" />
+            <span>Primary Color</span>
+          </div>
+          <span className="font-extrabold text-[#111318] text-base block">
+            {item.metadata.color || 'Unspecified'}
+          </span>
+        </div>
+
+        {/* Status */}
+        <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 space-y-1">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-gray-500">
+            <Info className="w-3.5 h-3.5 text-blue-600" />
+            <span>Listing Type</span>
+          </div>
+          <span className="font-extrabold text-[#111318] text-base block">{item.status}</span>
+        </div>
+
       </div>
     </div>
   );

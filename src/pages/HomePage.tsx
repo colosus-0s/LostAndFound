@@ -8,13 +8,9 @@ import { RecoverySection } from '../components/home/RecoverySection';
 
 export const HomePage: React.FC = () => {
   return (
-    <div className="relative min-h-[calc(100vh-80px)] bg-hero-atmosphere flex flex-col justify-between overflow-hidden">
+    <div className="relative min-h-screen bg-[#F8F9FA] text-[#111318] flex flex-col justify-between overflow-hidden">
       
-      {/* Background Decorative Glow Elements */}
-      <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Main Content Area: Hero, Stats, Journey, Matching, Verification & Recovery Sections */}
+      {/* Main Narrative Sequence: Hero -> Stats -> Journey -> Matching -> Verification -> Recovery */}
       <main className="flex-1 flex flex-col justify-center">
         <HeroSection />
         <StatsPanel />

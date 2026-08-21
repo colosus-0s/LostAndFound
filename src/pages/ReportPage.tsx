@@ -132,28 +132,24 @@ export const ReportPage: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#04060A] text-slate-100 py-10 md:py-16 px-6 md:px-12 relative overflow-hidden">
+    <div ref={containerRef} className="min-h-screen bg-[#F8F9FA] text-[#111318] py-10 md:py-16 px-6 md:px-12 relative overflow-hidden">
       
-      {/* Background Decorative Glow */}
-      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-10 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none" />
-
       <main className="max-w-[1200px] mx-auto relative z-10 space-y-8">
         
-        {/* Top Page Navigation Control (PROBLEM 1 FIX) */}
+        {/* Top Page Navigation Control */}
         {!submittedReportId && (
           <div className="flex items-center justify-between">
             <button
               onClick={handlePageBack}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-[#111318] transition-colors"
             >
-              <ChevronLeft className="w-4 h-4 text-violet-400" />
+              <ChevronLeft className="w-4 h-4 text-blue-600" />
               <span>Back to Browse</span>
             </button>
             
             <Link
               to="/browse"
-              className="text-xs font-semibold text-slate-300 hover:underline"
+              className="text-xs font-semibold text-gray-600 hover:underline"
             >
               Browse Directory
             </Link>
@@ -163,11 +159,11 @@ export const ReportPage: React.FC = () => {
         {/* Page Top Title */}
         {!submittedReportId && (
           <div className="text-center space-y-2 mb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-950/40 border border-violet-500/40 text-violet-300 text-[11px] font-bold tracking-widest uppercase">
-              <Sparkles className="w-3.5 h-3.5 text-violet-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-bold tracking-widest uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
               <span>GUIDED REPORTING SYSTEM</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white font-sans tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#111318] font-sans tracking-tight">
               Report an Item
             </h1>
           </div>
@@ -247,11 +243,11 @@ export const ReportPage: React.FC = () => {
             </div>
 
             {/* Form Step Navigation Bar */}
-            <div className="max-w-2xl lg:max-w-3xl mx-auto flex items-center justify-between pt-6 border-t border-indigo-950/80">
+            <div className="max-w-2xl lg:max-w-3xl mx-auto flex items-center justify-between pt-6 border-t border-gray-200">
               <button
                 disabled={currentStep === 1 || isSubmitting}
                 onClick={handleBack}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#0B0F1B] border border-indigo-900/60 text-slate-300 font-bold text-xs uppercase tracking-wider hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white border border-gray-200 text-gray-700 font-bold text-xs uppercase tracking-wider hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-subtle"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back</span>
@@ -260,12 +256,12 @@ export const ReportPage: React.FC = () => {
               <button
                 disabled={isSubmitting || (currentStep === 1 && !formData.reportType)}
                 onClick={handleNext}
-                className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white transition-all shadow-lg ${
+                className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white transition-all shadow-sm ${
                   formData.reportType === 'LOST'
-                    ? 'bg-rose-600 hover:bg-rose-500 shadow-rose-950/50'
+                    ? 'bg-red-600 hover:bg-red-700'
                     : formData.reportType === 'FOUND'
-                    ? 'bg-cyan-600 hover:bg-cyan-500 shadow-cyan-950/50'
-                    : 'bg-violet-600 hover:bg-violet-500 shadow-violet-950/50'
+                    ? 'bg-teal-700 hover:bg-teal-800'
+                    : 'bg-blue-600 hover:bg-blue-700'
                 } disabled:opacity-40 disabled:cursor-not-allowed`}
               >
                 {isSubmitting ? (

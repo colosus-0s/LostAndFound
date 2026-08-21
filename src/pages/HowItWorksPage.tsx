@@ -6,7 +6,7 @@ import { HowItWorksCTA } from '../components/how-it-works/HowItWorksCTA';
 
 export const HowItWorksPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#04060A] text-slate-100 relative overflow-hidden">
+    <div className="min-h-screen bg-[#F8F9FA] text-[#111318] relative overflow-hidden">
       <main className="space-y-4">
         <HowItWorksHero />
         <RecoveryJourney />

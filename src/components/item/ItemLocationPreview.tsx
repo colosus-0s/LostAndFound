@@ -1,57 +1,44 @@
 import React from 'react';
-import { MapPin, ShieldAlert, Building2 } from 'lucide-react';
+import { MapPin, Calendar, ShieldCheck } from 'lucide-react';
 
 interface ItemLocationPreviewProps {
   location: string;
+  date: string;
 }
 
-export const ItemLocationPreview: React.FC<ItemLocationPreviewProps> = ({ location }) => {
+export const ItemLocationPreview: React.FC<ItemLocationPreviewProps> = ({ location, date }) => {
   return (
-    <div className="w-full bg-[#0A0D18]/90 border border-indigo-950/80 rounded-3xl p-6 md:p-8 space-y-4 shadow-lg">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-extrabold text-white font-sans tracking-tight flex items-center gap-2">
-          <MapPin className="w-5 h-5 text-violet-400" />
-          <span>Reported Location Zone</span>
-        </h3>
-        <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/40 px-2.5 py-1 rounded-full border border-emerald-500/30">
-          Approximate Public Zone
-        </span>
+    <div className="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 space-y-6 shadow-subtle">
+      <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-gray-500">
+        <MapPin className="w-4 h-4 text-blue-600" />
+        <span>LOCATION & TIMELINE</span>
       </div>
 
-      {/* Visual Campus Zone Card Placeholder */}
-      <div className="relative w-full h-44 rounded-2xl bg-[#04060A] border border-indigo-950/80 overflow-hidden flex flex-col justify-between p-5">
-        
-        {/* Decorative Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-15 pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(rgba(139, 92, 246, 0.4) 1px, transparent 1px)',
-            backgroundSize: '16px 16px',
-          }}
-        />
-
-        <div className="relative z-10 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-slate-300 font-bold text-xs">
-            <Building2 className="w-4 h-4 text-cyan-400" />
-            <span>Campus Security Zone</span>
+      <div className="space-y-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+            <MapPin className="w-5 h-5" />
           </div>
-          <span className="text-[11px] font-semibold text-slate-400">GPS Ref: 37.7749° N, 122.4194° W</span>
+          <div>
+            <span className="text-xs font-bold text-gray-400 block">Reported Area Zone</span>
+            <span className="text-base font-extrabold text-[#111318]">{location}</span>
+          </div>
         </div>
 
-        <div className="relative z-10 space-y-1">
-          <h4 className="text-white font-extrabold text-lg font-sans">
-            {location}
-          </h4>
-          <p className="text-slate-400 text-xs">
-            Specific room details or cabinet security numbers are kept private until verification.
-          </p>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+            <Calendar className="w-5 h-5" />
+          </div>
+          <div>
+            <span className="text-xs font-bold text-gray-400 block">Date Reported</span>
+            <span className="text-base font-extrabold text-[#111318]">{date}</span>
+          </div>
         </div>
+      </div>
 
-        <div className="relative z-10 flex items-center gap-1.5 text-[11px] text-slate-400 pt-2 border-t border-indigo-950/80">
-          <ShieldAlert className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-          <span>Exact storage location is disclosed only to verified owners.</span>
-        </div>
-
+      <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 text-xs text-gray-600 flex items-start gap-2">
+        <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+        <span>Exact storage room or desk location is withheld until ownership verification is complete.</span>
       </div>
     </div>
   );

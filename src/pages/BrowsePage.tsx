@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { itemService } from '../services/itemService';
 import { BrowseHeader } from '../components/browse/BrowseHeader';
 import { BrowseFilters } from '../components/browse/BrowseFilters';
@@ -6,11 +7,24 @@ import { ItemGrid } from '../components/browse/ItemGrid';
 import { EmptyState } from '../components/browse/EmptyState';
 
 export const BrowsePage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams] = useSearchParams();
+
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [status, setStatus] = useState<'ALL' | 'LOST' | 'FOUND'>('ALL');
-  const [category, setCategory] = useState('All');
+  const [category, setCategory] = useState(searchParams.get('category') || 'All');
   const [location, setLocation] = useState('All');
   const [sortBy, setSortBy] = useState<'NEWEST' | 'OLDEST' | 'MATCH' | 'NAME'>('NEWEST');
+
+  useEffect(() => {
+    const queryParam = searchParams.get('q');
+    if (queryParam !== null) {
+      setSearchQuery(queryParam);
+    }
+    const catParam = searchParams.get('category');
+    if (catParam !== null) {
+      setCategory(catParam);
+    }
+  }, [searchParams]);
 
   // Computed filtered items
   const filteredItems = useMemo(() => {
@@ -34,11 +48,8 @@ export const BrowsePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#04060A] text-slate-100 py-10 md:py-16 px-6 md:px-12 relative overflow-hidden">
-      {/* Background Subtle Atmosphere Glow */}
-      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-10 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
-
+    <div className="min-h-screen bg-[#F8F9FA] text-[#111318] py-10 md:py-16 px-6 md:px-12 relative overflow-hidden">
+      
       {/* Main Responsive Max-Width Container */}
       <main className="max-w-[1440px] mx-auto relative z-10 space-y-6">
         

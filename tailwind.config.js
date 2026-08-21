@@ -8,25 +8,31 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#04060A',
+        background: '#F8F9FA', // Clean light neutral background
         surface: {
-          DEFAULT: '#0A0D18',
-          elevated: '#0B0F1B',
-          card: '#0D1122',
+          DEFAULT: '#FFFFFF',
+          neutral: '#F1F3F5',
+          dark: '#111318',
+        },
+        primary: {
+          DEFAULT: '#111318',
+          muted: '#525866',
         },
         brand: {
-          violet: '#7C3AED',
-          purple: '#8B5CF6',
-          indigo: '#6366F1',
-          cyan: '#06B6D4',
-          blue: '#3B82F6',
+          DEFAULT: '#2563EB', // Restrained Indigo/Blue
+          blue: '#1D4ED8',
+          indigo: '#4F46E5',
+          light: '#EFF6FF',
         },
         status: {
-          lost: '#EF4444',
-          found: '#3B82F6',
-          matched: '#8B5CF6',
-          verified: '#10B981',
-          returned: '#06B6D4',
+          lost: '#DC2626',      // Warm Red/Rose
+          lostBg: '#FEF2F2',
+          found: '#0D9488',     // Teal / Blue-Green
+          foundBg: '#F0FDFA',
+          matched: '#4F46E5',   // Indigo
+          matchedBg: '#EEF2FF',
+          verified: '#10B981',  // Emerald Green
+          verifiedBg: '#ECFDF5',
         }
       },
       fontFamily: {
@@ -36,9 +42,9 @@ export default {
         'content': '1440px',
       },
       boxShadow: {
-        'glow-violet': '0 0 40px -10px rgba(124, 58, 237, 0.3)',
-        'glow-cyan': '0 0 40px -10px rgba(6, 182, 212, 0.3)',
-        'card-glow': '0 0 30px -5px rgba(124, 58, 237, 0.15), 0 0 15px -3px rgba(6, 182, 212, 0.1)',
+        'subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
+        'card': '0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03)',
+        'float': '0 12px 30px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04)',
       }
     },
   },

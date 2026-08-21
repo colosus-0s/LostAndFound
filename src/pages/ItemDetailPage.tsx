@@ -29,8 +29,8 @@ export const ItemDetailPage: React.FC = () => {
       // Subtle page entrance
       gsap.fromTo(
         containerRef.current,
-        { opacity: 0.8, y: 15 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+        { opacity: 0.85, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' },
       );
     }, containerRef);
 
@@ -40,19 +40,19 @@ export const ItemDetailPage: React.FC = () => {
   // Error State: Item Not Found
   if (!item) {
     return (
-      <div className="min-h-[75vh] bg-[#04060A] text-slate-100 flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-16 h-16 rounded-2xl bg-violet-950/40 border border-violet-500/40 flex items-center justify-center text-violet-400 mb-4">
+      <div className="min-h-[75vh] bg-[#F8F9FA] text-[#111318] flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 mb-4">
           <SearchX className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#111318] tracking-tight mb-2 font-sans">
           Item Report Not Found
         </h1>
-        <p className="text-slate-400 text-sm max-w-md mb-6 leading-relaxed">
+        <p className="text-gray-600 text-sm max-w-md mb-6 leading-relaxed">
           The requested item report could not be found. It may have been resolved, returned, or the link may be invalid.
         </p>
         <Link
           to="/browse"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(124,58,237,0.4)]"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Browse Directory</span>
@@ -66,25 +66,21 @@ export const ItemDetailPage: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#04060A] text-slate-100 py-10 md:py-16 px-6 md:px-12 relative overflow-hidden">
+    <div ref={containerRef} className="min-h-screen bg-[#F8F9FA] text-[#111318] py-10 md:py-16 px-6 md:px-12 relative overflow-hidden">
       
-      {/* Background Decorative Glow */}
-      <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none" />
-
       <main className="max-w-[1440px] mx-auto relative z-10 space-y-10">
         
         {/* Subtle Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs font-semibold text-slate-400">
-          <Link to="/browse" className="hover:text-white transition-colors">
+        <nav className="flex items-center gap-2 text-xs font-semibold text-gray-500">
+          <Link to="/browse" className="hover:text-[#111318] transition-colors">
             Browse Directory
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
-          <span className="text-violet-300 font-bold truncate max-w-xs md:max-w-md">{item.name}</span>
+          <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+          <span className="text-blue-600 font-bold truncate max-w-xs md:max-w-md">{item.name}</span>
         </nav>
 
         {/* Main Desktop 2-Column Product Layout */}
-        <div className="bg-[#0A0D18]/90 backdrop-blur-xl border border-indigo-950/80 rounded-3xl p-6 md:p-10 shadow-[0_10px_50px_rgba(0,0,0,0.6)] grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="bg-white border border-gray-200 rounded-3xl p-6 md:p-10 shadow-subtle grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
           {/* LEFT: Large Item Gallery (5 Columns) */}
           <div className="lg:col-span-5 w-full">
@@ -103,17 +99,26 @@ export const ItemDetailPage: React.FC = () => {
 
         </div>
 
-        {/* Grouped Specifications & Location Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-          <ItemDetailsGroup item={item} />
-          <ItemLocationPreview location={item.location} />
+        {/* Specifications & Location Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* Specs Group (7 Columns) */}
+          <div className="lg:col-span-7 w-full space-y-8">
+            <ItemDetailsGroup item={item} />
+            
+            {/* Potential Matches */}
+            {potentialMatches.length > 0 && (
+              <PotentialMatchesGroup matches={potentialMatches} currentItemStatus={item.status} />
+            )}
+          </div>
+
+          {/* Location & Claim Info (5 Columns) */}
+          <div className="lg:col-span-5 w-full space-y-8">
+            <ItemLocationPreview location={item.location} date={item.date} />
+            <ClaimInfoBox itemStatus={item.status} onInitiateClaim={handleInitiateClaim} />
+          </div>
+
         </div>
-
-        {/* How Claiming Works */}
-        <ClaimInfoBox />
-
-        {/* Potentially Matching Items */}
-        <PotentialMatchesGroup matches={potentialMatches} />
 
       </main>
     </div>

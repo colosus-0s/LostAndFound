@@ -1,73 +1,38 @@
 import React from 'react';
-import { Package, Heart, Building2, ShieldCheck } from 'lucide-react';
+import { PackageCheck, ShieldCheck, Clock, Users } from 'lucide-react';
 
-const STATS = [
-  {
-    icon: Package,
-    number: '2,450+',
-    title: 'Items Recovered',
-    description: 'Successfully returned to their rightful owners',
-    color: 'violet', // violet/purple glow
-    iconBg: 'bg-violet-600/20 border-violet-500/40 text-violet-400 shadow-[0_0_15px_rgba(124,58,237,0.3)]',
-    titleColor: 'text-violet-400',
-  },
-  {
-    icon: Heart,
-    number: '1,890+',
-    title: 'Happy Reunions',
-    description: 'People reunited with what matters most',
-    color: 'purple',
-    iconBg: 'bg-violet-600/20 border-violet-500/40 text-violet-400 shadow-[0_0_15px_rgba(139,92,246,0.3)]',
-    titleColor: 'text-violet-400',
-  },
-  {
-    icon: Building2,
-    number: '75+',
-    title: 'Active Campuses',
-    description: 'Universities and organizations trusting our platform',
-    color: 'blue',
-    iconBg: 'bg-blue-600/20 border-blue-500/40 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.3)]',
-    titleColor: 'text-blue-400',
-  },
-  {
-    icon: ShieldCheck,
-    number: '98%',
-    title: 'Success Rate',
-    description: 'High matching accuracy and verification rate',
-    color: 'cyan',
-    iconBg: 'bg-cyan-600/20 border-cyan-500/40 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]',
-    titleColor: 'text-cyan-400',
-  },
+const STATS_DATA = [
+  { label: 'Community Reports Processed', value: '1,280+', icon: PackageCheck },
+  { label: 'Ownership Verification Rate', value: '94.2%', icon: ShieldCheck },
+  { label: 'Avg Recovery Window', value: '48 Hours', icon: Clock },
+  { label: 'Active Community Members', value: '3,500+', icon: Users },
 ];
 
 export const StatsPanel: React.FC = () => {
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 mt-12 md:mt-16 mb-16">
-      <div className="w-full bg-[#0A0D18]/85 backdrop-blur-xl border border-indigo-950/60 rounded-3xl p-8 md:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-indigo-950/80">
-          {STATS.map((stat) => {
-            const Icon = stat.icon;
+    <section className="relative w-full py-8 bg-[#F8F9FA] border-y border-gray-200">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+        <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-subtle grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {STATS_DATA.map((stat, idx) => {
+            const IconComp = stat.icon;
             return (
-              <div key={stat.title} className="flex items-start gap-5 lg:px-8 first:pl-0 last:pr-0">
-                <div className={`w-14 h-14 rounded-2xl border flex items-center justify-center shrink-0 ${stat.iconBg}`}>
-                  <Icon className="w-7 h-7" />
+              <div key={idx} className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+                  <IconComp className="w-6 h-6" />
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-3xl md:text-4xl font-extrabold text-white tracking-tight font-sans">
-                    {stat.number}
+                <div>
+                  <span className="text-2xl sm:text-3xl font-black text-[#111318] tracking-tight block font-sans">
+                    {stat.value}
                   </span>
-                  <span className={`text-sm font-bold mt-1 ${stat.titleColor}`}>
-                    {stat.title}
+                  <span className="text-xs font-bold text-gray-500 block">
+                    {stat.label}
                   </span>
-                  <p className="text-slate-400 text-xs md:text-sm mt-1.5 font-normal leading-relaxed">
-                    {stat.description}
-                  </p>
                 </div>
               </div>
             );
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
