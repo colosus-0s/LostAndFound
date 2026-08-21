@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
         
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-violet-600/30 to-cyan-500/30 border border-violet-500/40 flex items-center justify-center shadow-[0_0_15px_rgba(124,58,237,0.3)] group-hover:border-violet-400 transition-all">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-violet-600/30 to-cyan-500/30 border border-violet-500/40 flex items-center justify-center shadow-[0_0_15px_rgba(124,58,237,0.3)] group-hover:border-violet-400 group-hover:shadow-[0_0_25px_rgba(124,58,237,0.5)] transition-all duration-300">
             <Search className="w-5 h-5 text-violet-400 group-hover:text-cyan-400 transition-colors" />
           </div>
           <div className="flex flex-col">
@@ -75,7 +75,7 @@ export const Navbar: React.FC = () => {
           </Link>
           <Link
             to="/report"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-sm font-semibold shadow-[0_0_20px_rgba(124,58,237,0.35)] transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-sm font-semibold shadow-[0_0_20px_rgba(124,58,237,0.35)] hover:shadow-[0_0_30px_rgba(124,58,237,0.55)] transition-all duration-300 transform hover:scale-[1.03] active:scale-[0.97]"
           >
             <Plus className="w-4 h-4 stroke-[2.5]" />
             <span>Report Item</span>

@@ -23,7 +23,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Central match card glow */
+/* Central match card glass glow */
 .card-glass-glow {
   background: rgba(10, 13, 24, 0.85);
   backdrop-filter: blur(16px);
@@ -45,24 +45,85 @@
   border-radius: 50%;
 }
 
+/* Animated SVG Path Dash Flow */
+@keyframes dash-flow {
+  0% {
+    stroke-dashoffset: 40;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-dash-flow {
+  animation: dash-flow 4s linear infinite;
+}
+
+.animate-dash-flow-reverse {
+  animation: dash-flow 4s linear infinite reverse;
+}
+
 /* Glowing Nodes */
 .node-glow-purple {
   box-shadow: 0 0 12px 3px rgba(139, 92, 246, 0.8);
+  animation: pulse-purple 3s ease-in-out infinite;
 }
 
 .node-glow-blue {
   box-shadow: 0 0 12px 3px rgba(59, 130, 246, 0.8);
+  animation: pulse-blue 3s ease-in-out 1s infinite;
 }
 
 .node-glow-cyan {
   box-shadow: 0 0 12px 3px rgba(6, 182, 212, 0.8);
+  animation: pulse-cyan 3s ease-in-out 2s infinite;
 }
 
-/* Status Badges */
-.status-badge-glass {
-  background: rgba(11, 15, 27, 0.85);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+@keyframes pulse-purple {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 20px 6px rgba(139, 92, 246, 1); }
+}
+
+@keyframes pulse-blue {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 20px 6px rgba(59, 130, 246, 1); }
+}
+
+@keyframes pulse-cyan {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 20px 6px rgba(6, 182, 212, 1); }
+}
+
+/* Periodic Status Badge Pulse Animations */
+@keyframes badge-pulse-violet {
+  0%, 100% { box-shadow: 0 0 18px rgba(124, 58, 237, 0.3); border-color: rgba(139, 92, 246, 0.4); }
+  50% { box-shadow: 0 0 28px rgba(139, 92, 246, 0.7); border-color: rgba(167, 139, 250, 0.9); }
+}
+
+@keyframes badge-pulse-blue {
+  0%, 100% { box-shadow: 0 0 18px rgba(59, 130, 246, 0.3); border-color: rgba(59, 130, 246, 0.4); }
+  50% { box-shadow: 0 0 28px rgba(59, 130, 246, 0.7); border-color: rgba(96, 165, 250, 0.9); }
+}
+
+@keyframes badge-pulse-cyan {
+  0%, 100% { box-shadow: 0 0 18px rgba(6, 182, 212, 0.3); border-color: rgba(6, 182, 212, 0.4); }
+  50% { box-shadow: 0 0 28px rgba(6, 182, 212, 0.7); border-color: rgba(45, 212, 191, 0.9); }
+}
+
+.badge-pulse-reported {
+  animation: badge-pulse-violet 4s ease-in-out 0s infinite;
+}
+
+.badge-pulse-matching {
+  animation: badge-pulse-violet 4s ease-in-out 1s infinite;
+}
+
+.badge-pulse-verified {
+  animation: badge-pulse-blue 4s ease-in-out 2s infinite;
+}
+
+.badge-pulse-returned {
+  animation: badge-pulse-cyan 4s ease-in-out 3s infinite;
 }
 
 /* Custom Scrollbar */

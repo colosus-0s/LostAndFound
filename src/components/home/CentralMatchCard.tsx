@@ -6,14 +6,15 @@ export const CentralMatchCard: React.FC = () => {
   const item = HERO_FEATURED_MATCH;
 
   return (
-    <div className="relative w-full max-w-[340px] bg-[#0A0D18]/90 backdrop-blur-xl border border-violet-500/35 rounded-3xl p-5 shadow-[0_0_40px_rgba(124,58,237,0.3)] transition-transform hover:scale-[1.01]">
+    <div className="relative w-full max-w-[340px] bg-[#0A0D18]/90 backdrop-blur-xl border border-violet-500/35 rounded-3xl p-5 shadow-[0_0_40px_rgba(124,58,237,0.3)] transition-all duration-300 hover:border-violet-500/60 hover:shadow-[0_0_50px_rgba(124,58,237,0.45)]">
       {/* Top Header Status & Match % */}
       <div className="flex items-center justify-between mb-4">
         <span className="px-2.5 py-0.5 rounded-md bg-rose-500/20 border border-rose-500/40 text-rose-400 text-[10px] font-extrabold tracking-widest uppercase">
           {item.status}
         </span>
-        <span className="text-xs font-bold text-violet-400 tracking-wide">
-          {item.matchPercentage}% Match
+        <span className="text-xs font-bold text-violet-400 tracking-wide inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-violet-950/40 border border-violet-500/30 animate-pulse">
+          <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
+          <span>{item.matchPercentage}% Match</span>
         </span>
       </div>
 
@@ -44,13 +45,13 @@ export const CentralMatchCard: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-1.5 text-violet-400 text-xs font-semibold pt-1">
-          <Sparkles className="w-3.5 h-3.5 text-violet-400" />
+          <Sparkles className="w-3.5 h-3.5 text-violet-400 animate-spin-slow" />
           <span>Smart Match</span>
         </div>
       </div>
 
       {/* CTA Button */}
-      <button className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(124,58,237,0.4)] transition-all transform active:scale-95">
+      <button className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(124,58,237,0.4)] hover:shadow-[0_0_30px_rgba(124,58,237,0.6)] transition-all duration-300 transform active:scale-95">
         <span>View Match</span>
         <ArrowRight className="w-4 h-4" />
       </button>
