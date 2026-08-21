@@ -1,141 +1,88 @@
-import React, { useState } from 'react';
-import { Search, PlusCircle, Menu, X, Compass, Shield, Info, Home as HomeIcon } from 'lucide-react';
-import { ROUTE_PATHS } from '../../routes';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Search, Plus } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const currentPath = ROUTE_PATHS.PUBLIC.HOME;
+  const location = useLocation();
 
-  const navLinks = [
-    { label: 'Home', href: ROUTE_PATHS.PUBLIC.HOME, icon: HomeIcon },
-    { label: 'Browse', href: ROUTE_PATHS.PUBLIC.BROWSE, icon: Compass },
-    { label: 'How It Works', href: ROUTE_PATHS.PUBLIC.HOW_IT_WORKS, icon: Shield },
-    { label: 'About', href: ROUTE_PATHS.PUBLIC.ABOUT, icon: Info },
-  ];
+  const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#06080E]/85 backdrop-blur-xl border-b border-white/[0.08] nav-header">
-      <div className="max-w-[1536px] mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-20">
-          {/* Brand Logo (Left) */}
-          <a
-            href={ROUTE_PATHS.PUBLIC.HOME}
-            className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#6366F1]/50 rounded-xl p-1 transition-opacity hover:opacity-90 group shrink-0"
-          >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#6366F1] via-[#818CF8] to-[#22D3EE] p-0.5 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:shadow-indigo-500/40 transition-all">
-              <div className="w-full h-full bg-[#06080E] rounded-[10px] flex items-center justify-center">
-                <Search className="w-5 h-5 text-[#6366F1]" />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tight text-white flex items-center gap-1 leading-none">
-                Lost<span className="text-[#6366F1]">&</span>Found
-              </span>
-              <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase mt-1">
-                PLATFORM
-              </span>
-            </div>
-          </a>
-
-          {/* Centered Navigation Links (Center) */}
-          <nav className="hidden md:flex items-center gap-10 lg:gap-14" aria-label="Main Navigation">
-            {navLinks.map((link) => {
-              const isActive = link.href === currentPath;
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className={`relative py-1.5 text-sm font-medium transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-[#6366F1]/50 rounded-lg ${
-                    isActive
-                      ? 'text-white font-semibold'
-                      : 'text-gray-300 hover:text-white'
-                  }`}
-                >
-                  {link.label}
-                  {isActive && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#6366F1] rounded-full shadow-sm shadow-[#6366F1]" />
-                  )}
-                </a>
-              );
-            })}
-          </nav>
-
-          {/* Action Buttons (Right) */}
-          <div className="hidden md:flex items-center gap-6 shrink-0">
-            <a
-              href={ROUTE_PATHS.PUBLIC.LOGIN}
-              className="text-sm font-medium text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#6366F1]/50 rounded-lg px-2 py-1"
-            >
-              Sign In
-            </a>
-            <a href={ROUTE_PATHS.PUBLIC.REPORT}>
-              <button
-                type="button"
-                className="bg-gradient-to-r from-[#6366F1] to-[#4F46E5] hover:from-[#4F46E5] hover:to-[#4338CA] text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 transition-all flex items-center gap-2 cursor-pointer"
-              >
-                <PlusCircle className="w-4 h-4" />
-                <span>+ Report Item</span>
-              </button>
-            </a>
+    <header className="sticky top-0 z-50 w-full bg-[#04060A]/90 backdrop-blur-md border-b border-indigo-950/30 transition-colors">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+        
+        {/* Brand Logo */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-violet-600/30 to-cyan-500/30 border border-violet-500/40 flex items-center justify-center shadow-[0_0_15px_rgba(124,58,237,0.3)] group-hover:border-violet-400 transition-all">
+            <Search className="w-5 h-5 text-violet-400 group-hover:text-cyan-400 transition-colors" />
           </div>
+          <div className="flex flex-col">
+            <span className="text-white font-bold text-lg tracking-tight leading-none font-sans">
+              Lost & Found
+            </span>
+            <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-slate-400 mt-1">
+              PLATFORM
+            </span>
+          </div>
+        </Link>
 
-          {/* Mobile Hamburger Toggle */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2.5 rounded-xl bg-[#111827] border border-white/10 text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#6366F1]/50 cursor-pointer"
-            aria-expanded={mobileMenuOpen}
-            aria-label="Toggle Navigation Menu"
+        {/* Center Navigation Links */}
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <Link
+            to="/"
+            className={`relative py-2 transition-colors ${
+              isActive('/') ? 'text-white font-semibold' : 'text-slate-400 hover:text-white'
+            }`}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            Home
+            {isActive('/') && (
+              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 to-cyan-400 rounded-full shadow-[0_0_8px_rgba(124,58,237,0.8)]" />
+            )}
+          </Link>
+          <Link
+            to="/browse"
+            className={`relative py-2 transition-colors ${
+              isActive('/browse') ? 'text-white font-semibold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            Browse
+          </Link>
+          <Link
+            to="/how-it-works"
+            className={`relative py-2 transition-colors ${
+              isActive('/how-it-works') ? 'text-white font-semibold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            How It Works
+          </Link>
+          <Link
+            to="/about"
+            className={`relative py-2 transition-colors ${
+              isActive('/about') ? 'text-white font-semibold' : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            About
+          </Link>
+        </nav>
+
+        {/* Right CTA Actions */}
+        <div className="flex items-center gap-6">
+          <Link
+            to="/login"
+            className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+          >
+            Sign In
+          </Link>
+          <Link
+            to="/report"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-sm font-semibold shadow-[0_0_20px_rgba(124,58,237,0.35)] transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+          >
+            <Plus className="w-4 h-4 stroke-[2.5]" />
+            <span>Report Item</span>
+          </Link>
         </div>
+
       </div>
-
-      {/* Mobile Menu Drawer */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#111827]/95 backdrop-blur-2xl border-b border-white/10 px-6 pt-4 pb-6 space-y-4">
-          <nav className="flex flex-col space-y-2" aria-label="Mobile Navigation">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              const isActive = link.href === currentPath;
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 text-base font-medium rounded-xl transition-colors ${
-                    isActive
-                      ? 'bg-[#6366F1]/15 text-white border border-[#6366F1]/30'
-                      : 'text-gray-300 hover:text-white hover:bg-white/[0.06]'
-                  }`}
-                >
-                  <Icon className="w-5 h-5 text-[#6366F1]" />
-                  {link.label}
-                </a>
-              );
-            })}
-          </nav>
-
-          <div className="pt-3 border-t border-white/10 flex flex-col gap-3">
-            <a
-              href={ROUTE_PATHS.PUBLIC.LOGIN}
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 text-sm font-medium text-gray-300 hover:text-white border border-white/10 rounded-xl"
-            >
-              Sign In
-            </a>
-            <a
-              href={ROUTE_PATHS.PUBLIC.REPORT}
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full bg-[#6366F1] hover:bg-[#4F46E5] text-white text-sm font-semibold py-3 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30"
-            >
-              <PlusCircle className="w-4 h-4" />
-              <span>+ Report Item</span>
-            </a>
-          </div>
-        </div>
-      )}
     </header>
   );
 };

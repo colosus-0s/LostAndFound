@@ -1,15 +1,14 @@
 import React from 'react';
-import { Navbar } from '../components/navigation';
+import { Outlet } from 'react-router-dom';
+import { Navbar } from '../components/navigation/Navbar';
 
-export interface PublicLayoutProps {
-  children: React.ReactNode;
-}
-
-export const PublicLayout: React.FC<PublicLayoutProps> = ({ children }) => {
+export const PublicLayout: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0c] text-gray-100 selection:bg-indigo-500/30 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#04060A] text-slate-100 flex flex-col font-sans selection:bg-violet-600 selection:text-white">
       <Navbar />
-      <main className="flex-1 w-full">{children}</main>
+      <div className="flex-1">
+        <Outlet />
+      </div>
     </div>
   );
 };

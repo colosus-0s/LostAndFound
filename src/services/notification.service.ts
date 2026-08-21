@@ -1,6 +1,5 @@
-/**
- * Notification Service Foundation
- * Handles user, staff, and admin system notifications.
- */
-
-export const notificationService = {};
+export const notificationService = {
+  async getUnreadCount(): Promise<number> {
+    return Promise.resolve(0);
+  },
+};
