@@ -13,18 +13,28 @@ export const MatchingSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const surfaceRef = useRef<HTMLDivElement>(null);
+  const lostCardRef = useRef<HTMLDivElement>(null);
+  const coreRef = useRef<HTMLDivElement>(null);
+  const statusBadgeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || !sectionRef.current) return;
+    const surfaceEl = surfaceRef.current;
+    const sectionEl = sectionRef.current;
+
+    if (!sectionEl || !surfaceEl) return;
 
     const ctx = gsap.context(() => {
-      // 1. Header entrance
+      if (prefersReducedMotion) {
+        return;
+      }
+
+      // --- 1. Header Entrance Timeline ---
       if (headerRef.current) {
         gsap.from(headerRef.current, {
-          y: 40,
+          y: 35,
           opacity: 0,
-          duration: 0.8,
+          duration: 0.7,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: headerRef.current,
@@ -34,35 +44,140 @@ export const MatchingSection: React.FC = () => {
         });
       }
 
-      // 2. Matching Surface & Cards Sequence
-      if (surfaceRef.current) {
-        const signalNodes = surfaceRef.current.querySelectorAll('.js-signal-node');
+      // --- 2. Master Matching Narrative Timeline ---
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: surfaceEl,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+        defaults: { ease: 'power3.out' },
+      });
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: surfaceRef.current,
-            start: 'top 75%',
-            toggleActions: 'play none none reverse',
+      // Step 1: Surface Enters
+      tl.from(surfaceEl, {
+        y: 40,
+        opacity: 0,
+        duration: 0.7,
+      });
+
+      // Step 2: Lost Card Activates & Rose Glow
+      if (lostCardRef.current) {
+        tl.from(
+          lostCardRef.current,
+          {
+            x: -25,
+            opacity: 0,
+            duration: 0.6,
           },
-        });
+          '-=0.3',
+        );
+      }
 
-        tl.from(surfaceRef.current, {
-          y: 45,
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-        })
-          .from(
-            signalNodes,
-            {
-              scale: 0.85,
-              opacity: 0,
-              stagger: 0.12,
-              duration: 0.5,
-              ease: 'back.out(1.5)',
+      // Step 3: Metadata Details Activate Sequentially
+      const signalNodes = surfaceEl.querySelectorAll('.js-signal-node');
+      if (signalNodes.length > 0) {
+        tl.from(
+          signalNodes,
+          {
+            scale: 0.85,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.4,
+            ease: 'back.out(1.4)',
+          },
+          '-=0.2',
+        );
+      }
+
+      // Step 4: Central Matching Engine Core Illuminates
+      const coreBadge = surfaceEl.querySelector('.js-core-badge');
+      const coreCaption = surfaceEl.querySelector('.js-core-caption');
+      if (coreBadge) {
+        tl.from(
+          coreBadge,
+          {
+            scale: 0.75,
+            opacity: 0,
+            duration: 0.5,
+            ease: 'back.out(1.6)',
+          },
+          '-=0.2',
+        );
+      }
+      if (coreCaption) {
+        tl.to(
+          coreCaption,
+          {
+            color: '#A78BFA',
+            borderColor: 'rgba(139,92,246,0.8)',
+            duration: 0.3,
+          },
+          '-=0.3',
+        );
+      }
+
+      // Step 5: Candidate Items Stagger In
+      const candidateCards = surfaceEl.querySelectorAll('.js-candidate-card');
+      if (candidateCards.length > 0) {
+        tl.from(
+          candidateCards,
+          {
+            x: 25,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 0.5,
+          },
+          '-=0.2',
+        );
+      }
+
+      // Step 6: Match Scores Count-up (0 -> 92%, 61%, 38%)
+      const matchScoreElements = surfaceEl.querySelectorAll('.js-match-score');
+      matchScoreElements.forEach((el) => {
+        const targetScore = parseInt(el.getAttribute('data-target-score') || '0', 10);
+        const scoreObj = { val: 0 };
+
+        tl.to(
+          scoreObj,
+          {
+            val: targetScore,
+            duration: 0.8,
+            ease: 'power1.out',
+            onUpdate: () => {
+              el.textContent = `${Math.round(scoreObj.val)}%`;
             },
-            '-=0.4',
-          );
+          },
+          '-=0.5',
+        );
+      });
+
+      // Step 7: Strongest 92% Candidate Highlights & Connection Line completes
+      const primaryCandidate = surfaceEl.querySelector('.js-primary-candidate');
+      if (primaryCandidate) {
+        tl.to(
+          primaryCandidate,
+          {
+            boxShadow: '0 0 35px rgba(139,92,246,0.45)',
+            borderColor: 'rgba(139,92,246,0.9)',
+            duration: 0.4,
+          },
+          '-=0.2',
+        );
+      }
+
+      // Step 8: Final Status Header Badge Activates ("POTENTIAL MATCH FOUND")
+      if (statusBadgeRef.current) {
+        tl.to(
+          statusBadgeRef.current,
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            ease: 'back.out(1.4)',
+          },
+          '-=0.2',
+        );
       }
     }, sectionRef);
 
@@ -109,8 +224,11 @@ export const MatchingSection: React.FC = () => {
               <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
               <span className="text-slate-200">MATCHING ENGINE ACTIVE</span>
             </div>
-            <div className="hidden sm:flex items-center gap-2 text-violet-400 bg-violet-950/40 px-3 py-1 rounded-full border border-violet-500/30">
-              <CheckCircle2 className="w-3.5 h-3.5" />
+            <div
+              ref={statusBadgeRef}
+              className="flex items-center gap-2 text-violet-300 bg-violet-950/60 px-3.5 py-1 rounded-full border border-violet-500/40 shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-500 opacity-80"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-violet-400" />
               <span>POTENTIAL MATCH FOUND</span>
             </div>
           </div>
@@ -120,11 +238,11 @@ export const MatchingSection: React.FC = () => {
             
             {/* LEFT: Lost Item Card */}
             <div className="w-full lg:w-[320px] shrink-0 flex items-center">
-              <MatchLostCard item={MockMatchData.LOST_ITEM} />
+              <MatchLostCard cardRef={lostCardRef} item={MockMatchData.LOST_ITEM} />
             </div>
 
             {/* CENTER: Smart Match Core & Signal Metadata Nodes */}
-            <MatchingCore signals={MockMatchData.SIGNALS} />
+            <MatchingCore coreRef={coreRef} signals={MockMatchData.SIGNALS} />
 
             {/* RIGHT: Candidate Found Matches Stack */}
             <div className="w-full lg:w-[360px] shrink-0 flex flex-col justify-center space-y-3">

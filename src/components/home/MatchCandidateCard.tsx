@@ -11,10 +11,10 @@ export const MatchCandidateCard: React.FC<MatchCandidateCardProps> = ({ candidat
 
   return (
     <div
-      className={`w-full rounded-2xl p-4 transition-all duration-300 ${
+      className={`js-candidate-card w-full rounded-2xl p-4 transition-all duration-500 hover:translate-y-[-2px] ${
         isPrimaryMatch
-          ? 'bg-[#0B0F1B]/95 border-2 border-violet-500/60 shadow-[0_0_30px_rgba(139,92,246,0.25)] relative overflow-hidden'
-          : 'bg-[#0A0D18]/80 border border-indigo-950/70 opacity-80 hover:opacity-100'
+          ? 'js-primary-candidate bg-[#0B0F1B]/95 border-2 border-violet-500/60 shadow-[0_0_30px_rgba(139,92,246,0.3)] relative overflow-hidden'
+          : 'bg-[#0A0D18]/80 border border-indigo-950/70 opacity-75 hover:opacity-100'
       }`}
     >
       {/* Primary Highlight Glow Line */}
@@ -38,7 +38,7 @@ export const MatchCandidateCard: React.FC<MatchCandidateCardProps> = ({ candidat
             </span>
 
             {isPrimaryMatch && (
-              <span className="px-2 py-0.5 rounded bg-violet-600/30 border border-violet-500/40 text-violet-300 text-[9px] font-extrabold tracking-widest uppercase flex items-center gap-1">
+              <span className="js-primary-badge px-2 py-0.5 rounded bg-violet-600/30 border border-violet-500/40 text-violet-300 text-[9px] font-extrabold tracking-widest uppercase flex items-center gap-1 transition-all duration-300">
                 <Sparkles className="w-2.5 h-2.5 text-violet-400" />
                 <span>POTENTIAL MATCH</span>
               </span>
@@ -55,10 +55,11 @@ export const MatchCandidateCard: React.FC<MatchCandidateCardProps> = ({ candidat
           </div>
         </div>
 
-        {/* Right Match Score */}
+        {/* Right Match Score Count-up Container */}
         <div className="flex flex-col items-end shrink-0 pl-3">
           <span
-            className={`font-extrabold text-base md:text-lg tracking-tight ${
+            data-target-score={matchPercentage}
+            className={`js-match-score font-extrabold text-base md:text-lg tracking-tight ${
               isPrimaryMatch
                 ? 'text-violet-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.6)]'
                 : 'text-slate-400'
